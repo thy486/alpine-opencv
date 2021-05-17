@@ -1,8 +1,9 @@
 FROM alpine:3.12
 
-ENV LANG=zh_CN.UTF-8 \
-    SHELL=/bin/bash PS1="\u@\h:\w \$ " \
-    OPENCV_VERSION=4.5.1
+ENV LANG=C.UTF-8 \
+    SHELL=/bin/bash PS1="\u@\h:\w \$ "
+    
+ARG OPENCV_VERSION=4.5.1
 
 # Add Edge repos
 RUN echo -e "\n\
