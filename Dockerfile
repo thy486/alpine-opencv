@@ -53,7 +53,7 @@ RUN apk update && apk upgrade && apk --no-cache add \
   zlib-dev
 
 # Python 3 as default
-RUN cd /tmp \
+RUN cd /tmp && \
   curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
   python get-pip.py && \
   ln -s /usr/bin/python3 /usr/local/bin/python && \
