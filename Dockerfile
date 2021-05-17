@@ -55,7 +55,7 @@ RUN apk update && apk upgrade && apk --no-cache add \
 # Python 3 as default
 RUN cd /tmp \
   curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-  python get-pip.py &&\
+  python get-pip.py && \
   ln -s /usr/bin/python3 /usr/local/bin/python && \
   ln -s /usr/bin/pip3 /usr/local/bin/pip && \
   rm -rf get-pip.py
