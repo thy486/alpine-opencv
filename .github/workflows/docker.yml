@@ -27,8 +27,7 @@ jobs:
         run: |
           echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
       
-      - name: Docker buildx image and push on master branch
-        if: github.ref == 'refs/heads/master'
+      - name: Docker buildx image and push
         run: |
           docker buildx build --output "type=image,push=true" --platform=linux/amd64 --tag ${{ secrets.DOCKER_USERNAME }}/alpine-opencv:latest ./
       
