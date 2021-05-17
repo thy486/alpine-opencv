@@ -53,9 +53,13 @@ RUN apk update && apk upgrade && apk --no-cache add \
   zlib-dev
 
 # Python 3 as default
-RUN ln -s /usr/bin/python3 /usr/local/bin/python && \
+RUN cd /tmp \
+  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+  python3 get-pip.py \
+  ln -s /usr/bin/python3 /usr/local/bin/python && \
   ln -s /usr/bin/pip3 /usr/local/bin/pip && \
-  pip install --upgrade pip
+  pip install --upgrade pip \
+  rm -rf get-pip.py
 
 # Install NumPy
 RUN ln -s /usr/include/locale.h /usr/include/xlocale.h && \
