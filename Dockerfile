@@ -9,10 +9,11 @@ RUN echo -e "\n\
 @edgemain http://nl.alpinelinux.org/alpine/edge/main\n\
 @edgecomm http://nl.alpinelinux.org/alpine/edge/community\n\
 @edgetest http://nl.alpinelinux.org/alpine/edge/testing"\
-  >> /etc/apk/repositories && \
-# Install required packages
-  apk update && apk upgrade && \
-  apk --no-cache add \
+  >> /etc/apk/repositories
+
+# Add Edge repos
+RUN apk update && apk upgrade && \
+    apk --no-cache add \
             bash \
             coreutils \
             moreutils \
@@ -103,4 +104,4 @@ RUN echo -e "\n\
 # Make sure it's built properly
   cp -p $(find /usr/local/lib/python3.8/site-packages -name cv2.*.so) \
    /usr/lib/python3.8/site-packages/cv2.so && \
-   python -c 'import cv2; print("Python: import cv2 - SUCCESS")' && apk del .build-deps || echo $(find / -name cv2.*.so)
+   python -c 'import cv2; print("Python: import cv2 - SUCCESS")' && apk del .build-deps
