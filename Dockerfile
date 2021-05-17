@@ -41,6 +41,7 @@ RUN apk update && apk upgrade && apk --no-cache add \
   linux-headers \
   make \
   musl \
+  musl-dev \
   openblas@edgecomm \
   openblas-dev@edgecomm \
   openjpeg-dev \
