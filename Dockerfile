@@ -14,7 +14,7 @@ RUN apk update && apk upgrade && \
             openssh \
             nginx \
             python3 && \
-  apk --no-cache add --virtual=.build-deps \
+  apk --no-cache --virtual=.build-deps add \
                   build-base \
                   ca-certificates \
                   clang-dev \
@@ -46,7 +46,7 @@ RUN apk update && apk upgrade && \
                   unzip \
                   zlib-dev \
                   v4l-utils \
-  apk --no-cache add --virtual .builddeps.edge \
+  apk --no-cache --virtual .builddeps.edge add \
                   libtbb libtbb-dev openblas openblas-dev \
                   --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/  \
                   && rm -rf /var/cache/apk/* && \
