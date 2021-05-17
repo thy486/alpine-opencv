@@ -84,7 +84,8 @@ RUN mkdir -p /opt && cd /opt && \
     -D PYTHON_EXECUTABLE=/usr/local/bin/python \
     .. \
   && \
-  make -j$(nproc) && make install && cd .. && rm -rf build
+  make -j$(nproc) && make install && cd .. && rm -rf build \
+  || cat /opt/opencv-${OPENCV_VERSION}/build/CMakeFiles/CMakeOutput.log
 
 # Make sure it's built properly
 RUN cp -p $(find /usr/local/lib/python3.8/dist-packages -name cv2.*.so) \
