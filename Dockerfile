@@ -65,7 +65,7 @@ RUN ln -s /usr/include/locale.h /usr/include/xlocale.h && \
   pip install numpy==1.18.0
 
 # Install OpenCV
-RUN mkdir /opt && cd /opt && \
+RUN mkdir -p /opt && cd /opt && \
   wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip && \
   unzip ${OPENCV_VERSION}.zip && rm ${OPENCV_VERSION}.zip && \
   wget https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip && \
@@ -84,8 +84,9 @@ RUN mkdir /opt && cd /opt && \
     -D PYTHON_EXECUTABLE=/usr/local/bin/python \
     .. \
   && \
-  make -j$(nproc) && make install && cd .. && rm -rf build \
-  && \
-  cp -p $(find /usr/local/lib/python3.8/dist-packages -name cv2.*.so) \
+  make -j$(nproc) && make install && cd .. && rm -rf build
+
+# Test OpenCV built successful
+RUN cp -p $(find /usr/local/lib/python3.8/dist-packages -name cv2.*.so) \
    /usr/lib/python3.8/site-packages/cv2.so && \
    python -c 'import cv2; print("Python: import cv2 - SUCCESS")'
