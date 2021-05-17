@@ -1,7 +1,6 @@
 FROM alpine:3.12
 
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
-    LANG=zh_CN.UTF-8 \
+ENV LANG=zh_CN.UTF-8 \
     SHELL=/bin/bash PS1="\u@\h:\w \$ " \
     OPENCV_VERSION=4.5.2
 
@@ -73,18 +72,20 @@ RUN mkdir -p /opt && cd /opt && \
   && \
   cd /opt/opencv-${OPENCV_VERSION} && mkdir build && cd build && \
   cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D BUILD_opencv_python3=ON \
     -D CMAKE_C_COMPILER=/usr/bin/clang \
     -D CMAKE_CXX_COMPILER=/usr/bin/clang++ \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D INSTALL_PYTHON_EXAMPLES=OFF \
-    -D INSTALL_C_EXAMPLES=OFF \
+    -D INSTALL_C_EXAMPLES=ON \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D BUILD_EXAMPLES=OFF \
     -D WITH_FFMPEG=ON \
     -D WITH_TBB=ON \
     -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-${OPENCV_VERSION}/modules \
     -D PYTHON_EXECUTABLE=/usr/local/bin/python \
     .. \
-  && \
-  make -j$(nproc) && make install && cd .. && rm -rf build \
+  && make -j$(nproc) && make install && cd .. && rm -rf build \
   || cat /opt/opencv-${OPENCV_VERSION}/build/CMakeFiles/CMakeOutput.log
 
 # Make sure it's built properly
