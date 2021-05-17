@@ -52,7 +52,8 @@ RUN apk update && apk upgrade && apk --no-cache add \
   tiff-dev \
   unzip \
   zlib-dev \
-  v4l-utils
+  v4l-utils \
+  && rm -rf /var/cache/apk/*
 
 # Python 3 as default
 RUN cd /tmp && \
@@ -80,8 +81,8 @@ RUN mkdir -p /opt && cd /opt && \
     -D CMAKE_CXX_COMPILER=/usr/bin/clang++ \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D INSTALL_PYTHON_EXAMPLES=OFF \
-    -D INSTALL_C_EXAMPLES=ON \
-    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D INSTALL_C_EXAMPLES=OFF \
+    -D INSTALL_PYTHON_EXAMPLES=OFF \
     -D BUILD_EXAMPLES=OFF \
     -D WITH_FFMPEG=ON \
     -D WITH_TBB=ON \
