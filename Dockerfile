@@ -62,7 +62,7 @@ RUN cd /tmp && \
 
 # Install NumPy
 RUN ln -s /usr/include/locale.h /usr/include/xlocale.h && \
-  pip install numpy
+  pip install numpy==1.18.0
 
 # Install OpenCV
 RUN mkdir /opt && cd /opt && \
