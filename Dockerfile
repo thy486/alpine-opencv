@@ -14,7 +14,7 @@ RUN apk update && apk upgrade && \
             openssh \
             nginx \
             python3 && \
-  apk --no-cache add --virtual build_make \
+  apk --no-cache add --virtual=.build-deps \
                   build-base \
                   ca-certificates \
                   clang-dev \
@@ -46,7 +46,7 @@ RUN apk update && apk upgrade && \
                   unzip \
                   zlib-dev \
                   v4l-utils \
-  apk --no-cache add --virtual build_mode \
+  apk --no-cache add --virtual .builddeps.edge \
                   libtbb libtbb-dev openblas openblas-dev \
                   --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/  \
                   && rm -rf /var/cache/apk/* && \
@@ -93,4 +93,4 @@ RUN apk update && apk upgrade && \
 # Make sure it's built properly
   cp -p $(find /usr/local/lib/python3.8/site-packages -name cv2.*.so) \
    /usr/lib/python3.8/site-packages/cv2.so && \
-   python -c 'import cv2; print("Python: import cv2 - SUCCESS")' && apk del .build-dep1 .build-dep2
+   python -c 'import cv2; print("Python: import cv2 - SUCCESS")' && apk del .build-deps .builddeps.edge
