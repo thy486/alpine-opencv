@@ -91,6 +91,7 @@ RUN apk update && apk upgrade && \
     -D PYTHON_EXECUTABLE=/usr/local/bin/python .. && \
   make -j$(nproc) && make install && cd .. && rm -rf build && \
 # Make sure it's built properly
-  cp -p $(find /usr/local/lib/python3.8/site-packages -name cv2.*.so) \
-   /usr/lib/python3.8/site-packages/cv2.so && \
-   python -c 'import cv2; print("Python: import cv2 - SUCCESS")' && apk del .build-dep1 .build-dep2
+  apk del .build-dep1 .build-dep2 \
+  # cp -p $(find /usr/local/lib/python3.8/site-packages -name cv2.*.so) \
+  #  /usr/lib/python3.8/site-packages/cv2.so && \
+  #  python -c 'import cv2; print("Python: import cv2 - SUCCESS")' \
