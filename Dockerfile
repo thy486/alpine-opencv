@@ -1,18 +1,7 @@
 FROM alpine:3.12
-
 ENV LANG=C.UTF-8 \
     SHELL=/bin/bash PS1="\u@\h:\w \$ "
-    
 ARG OPENCV_VERSION=4.5.1
-
-# Add Edge repos
-RUN echo -e "\n\
-@edgemain http://nl.alpinelinux.org/alpine/edge/main\n\
-@edgecomm http://nl.alpinelinux.org/alpine/edge/community\n\
-@edgetest http://nl.alpinelinux.org/alpine/edge/testing"\
-  >> /etc/apk/repositories
-
-# Add Edge repos
 RUN apk update && apk upgrade && \
     apk --no-cache add \
             bash \
@@ -25,7 +14,7 @@ RUN apk update && apk upgrade && \
             openssh \
             nginx \
             python3 && \
-  apk --no-cache add --virtual=.build-deps \
+  apk --no-cache add --virtual=.build-dep1 \
                   build-base \
                   ca-certificates \
                   clang-dev \
@@ -45,15 +34,11 @@ RUN apk update && apk upgrade && \
                   libjpeg-turbo-dev \
                   libpng-dev \
                   libressl-dev \
-                  libtbb@edgecomm \
-                  libtbb-dev@edgecomm \
                   libwebp-dev \
                   linux-headers \
                   make \
                   musl \
                   musl-dev \
-                  openblas@edgecomm \
-                  openblas-dev@edgecomm \
                   openjpeg-dev \
                   openjpeg-tools \
                   python3-dev \
@@ -61,6 +46,9 @@ RUN apk update && apk upgrade && \
                   unzip \
                   zlib-dev \
                   v4l-utils \
+  apk --no-cache add --virtual=.build-dep2 \
+                  libtbb libtbb-dev openblas openblas-dev \
+                  --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/  \
                   && rm -rf /var/cache/apk/* && \
 # Python 3 as default
   cd /tmp && \
@@ -105,4 +93,4 @@ RUN apk update && apk upgrade && \
 # Make sure it's built properly
   cp -p $(find /usr/local/lib/python3.8/site-packages -name cv2.*.so) \
    /usr/lib/python3.8/site-packages/cv2.so && \
-   python -c 'import cv2; print("Python: import cv2 - SUCCESS")' && apk del .build-deps
+   python -c 'import cv2; print("Python: import cv2 - SUCCESS")' && apk del .build-dep1 .build-dep2
