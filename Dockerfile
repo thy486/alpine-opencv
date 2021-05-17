@@ -45,12 +45,14 @@ RUN apk update && apk upgrade && apk --no-cache add \
   openblas@edgecomm \
   openblas-dev@edgecomm \
   openjpeg-dev \
+  openjpeg-tools \
   openssl \
   python3 \
   python3-dev \
   tiff-dev \
   unzip \
-  zlib-dev
+  zlib-dev \
+  v4l-utils
 
 # Python 3 as default
 RUN cd /tmp && \
@@ -83,6 +85,7 @@ RUN mkdir -p /opt && cd /opt && \
     -D BUILD_EXAMPLES=OFF \
     -D WITH_FFMPEG=ON \
     -D WITH_TBB=ON \
+    -D WITH_V4L=ON \
     -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-${OPENCV_VERSION}/modules \
     -D PYTHON_EXECUTABLE=/usr/local/bin/python \
     .. \
