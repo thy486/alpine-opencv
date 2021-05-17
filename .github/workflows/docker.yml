@@ -30,5 +30,5 @@ jobs:
       - name: Docker buildx image and push on master branch
         if: github.ref == 'refs/heads/master'
         run: |
-          docker buildx build --build-arg BUILD_PLATFORM="linux-amd64" --output "type=image,push=true" --platform=linux/amd64 --tag ${{ secrets.DOCKER_USERNAME }}/alpine-opencv:latest ./
+          docker buildx build --output "type=image,push=true" --platform=linux/amd64 --tag ${{ secrets.DOCKER_USERNAME }}/alpine-opencv:latest ./
       
