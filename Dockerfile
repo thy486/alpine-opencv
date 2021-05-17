@@ -14,7 +14,7 @@ RUN apk update && apk upgrade && \
             openssh \
             nginx \
             python3 && \
-  apk --no-cache add --virtual=.build-dep1 \
+  apk --no-cache add --virtual build_make \
                   build-base \
                   ca-certificates \
                   clang-dev \
@@ -46,7 +46,7 @@ RUN apk update && apk upgrade && \
                   unzip \
                   zlib-dev \
                   v4l-utils \
-  apk --no-cache add --virtual=.build-dep2 \
+  apk --no-cache add --virtual build_mode \
                   libtbb libtbb-dev openblas openblas-dev \
                   --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/  \
                   && rm -rf /var/cache/apk/* && \
@@ -59,7 +59,7 @@ RUN apk update && apk upgrade && \
   rm -rf get-pip.py && \
 # Install NumPy
   ln -s /usr/include/locale.h /usr/include/xlocale.h && \
-  pip install numpy && \
+  pip install --no-cache-dir  numpy && \
 # Install OpenCV
   mkdir -p /opt && cd /opt && \
   wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip && \
