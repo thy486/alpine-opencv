@@ -108,7 +108,7 @@ RUN cd /tmp && \
         -D PYTHON_EXECUTABLE=`which python3` \
         -D PYTHON3_EXECUTABLE=`which python3` \
         -D OPENCV_GENERATE_PKGCONFIG=ON \
-        -D BUILD_opencv_python3=YES .. && \
+        -D BUILD_opencv_python3=YES .. \
   && make -j`grep -c '^processor' /proc/cpuinfo` && make install && ln -s /usr/local/include/opencv4/opencv2/ /usr/local/include/opencv2 && cd .. && rm -rf build 
   # || cat /opt/opencv-${OPENCV_VERSION}/build/CMakeFiles/CMakeOutput.log
 
