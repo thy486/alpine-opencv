@@ -26,7 +26,6 @@ RUN apk add --update --no-cache \
     libpng libpng-dev \
     libwebp libwebp-dev \
     tiff tiff-dev \
-    jasper-libs jasper-dev \
     openexr openexr-dev \
     # Video depepndencies
     ffmpeg-libs ffmpeg-dev \
@@ -95,7 +94,7 @@ RUN apk add --update --no-cache \
     cd / && rm -vrf /tmp/opencv-$OPENCV_VERSION && \
     apk del --purge build-base clang clang-dev cmake pkgconf wget openblas-dev \
                     openexr-dev gstreamer-dev gst-plugins-base-dev libgphoto2-dev \
-                    libtbb-dev libjpeg-turbo-dev libpng-dev tiff-dev jasper-dev \
+                    libtbb-dev libjpeg-turbo-dev libpng-dev tiff-dev \
                     ffmpeg-dev libavc1394-dev python3-dev musl-dev openjpeg-tools && \
     rm -vrf /var/cache/apk/* \
     rm -f /tmp/get-pip.py 
