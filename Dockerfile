@@ -86,7 +86,7 @@ RUN mkdir -p /opt && cd /opt && \
   && \
   make -j$(nproc) && make install && cd .. && rm -rf build
 
-# Test OpenCV built successful
+# Make sure it's built properly
 RUN cp -p $(find /usr/local/lib/python3.8/dist-packages -name cv2.*.so) \
    /usr/lib/python3.8/site-packages/cv2.so && \
    python -c 'import cv2; print("Python: import cv2 - SUCCESS")'
