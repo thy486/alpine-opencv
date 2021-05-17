@@ -30,6 +30,7 @@ RUN apk add --update --no-cache \
     openexr openexr-dev \
     # Video depepndencies
     ffmpeg-libs ffmpeg-dev \
+    python3 python3-dev \
     libavc1394 libavc1394-dev \
     musl@edgemain musl-dev@edgemain \
     gstreamer gstreamer-dev \
