@@ -36,8 +36,8 @@ RUN apk update && apk upgrade && apk --no-cache add \
   libjpeg-turbo-dev \
   libpng-dev \
   libressl-dev \
-  libtbb@community \
-  libtbb-dev@community \
+  libtbb@edgecomm \
+  libtbb-dev@edgecomm \
   libwebp-dev \
   linux-headers \
   make \
