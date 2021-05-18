@@ -81,9 +81,9 @@ RUN apk update && apk upgrade && \
     -D WITH_TBB=ON \
     -D WITH_V4L=ON \
     -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-${OPENCV_VERSION}/modules \
-    -D PYTHON_EXECUTABLE=/usr/local/bin/python \ 
+    -D PYTHON_EXECUTABLE=/usr/local/bin/python \
     .. && \
-  make -j$(nproc) && make install && rm -rf /opt/* && \
+  make -j$(nproc) && make install && cd .. && rm -rf /opt/*  && \
 # Make sure it's built properly
   apk del --no-cache .build-dep1 .build-dep2 && \
   cp -p $(find /usr/local/lib/python3.8/site-packages -name cv2.*.so) \
