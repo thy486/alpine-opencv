@@ -81,10 +81,10 @@ RUN apk update && apk upgrade && \
     -D WITH_TBB=ON \
     -D WITH_V4L=ON \
     -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv-${OPENCV_VERSION}/modules \
-    -D PYTHON_EXECUTABLE=/usr/local/bin/python \ .. && \
-  make -j$(nproc) && make install && cd .. && rm -rf build && \
+    -D PYTHON_EXECUTABLE=/usr/local/bin/python \ /opt/opencv-${OPENCV_VERSION} && \
+  make -j$(nproc) && make install && rm -rf /opt/* && \
 # Make sure it's built properly
-  apk del .build-dep1 .build-dep2 && rm -rf /opt/* \
+  apk del --no-cache .build-dep1 .build-dep2 && \
   cp -p $(find /usr/local/lib/python3.8/site-packages -name cv2.*.so) \
    /usr/lib/python3.8/site-packages/cv2.so && \
    python -c 'import cv2; print("Python: import cv2 - SUCCESS")' \
