@@ -80,8 +80,8 @@ RUN apk update && apk upgrade && \
     -D WITH_FFMPEG=ON \
     -D WITH_TBB=ON \
     -D WITH_V4L=ON \
-    -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv-${OPENCV_VERSION}/modules \
-    -D PYTHON_EXECUTABLE=/usr/local/bin/python \ /opt/opencv-${OPENCV_VERSION} && \
+    -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-${OPENCV_VERSION}/modules \
+    -D PYTHON_EXECUTABLE=/usr/local/bin/python \ .. && \
   make -j$(nproc) && make install && rm -rf /opt/* && \
 # Make sure it's built properly
   apk del --no-cache .build-dep1 .build-dep2 && \
