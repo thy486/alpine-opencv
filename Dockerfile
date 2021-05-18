@@ -97,7 +97,7 @@ RUN apk update && apk upgrade && \
     -D PYTHON_EXECUTABLE=/usr/local/bin/python .. && \
   make -j$(nproc) && make install && ln -s /usr/local/include/opencv4/opencv2/ /usr/local/include/opencv2  && rm -rf /opt/*  && \
 # Make sure it's built properly
-  apk del --purge .build-dep1 .build-dep2 && rm -rf /var/cache/apk/* && \
+  apk del --purge .build-dep1 .build-dep2 && rm -rf /var/cache/apk/*
   # cp -p $(find /usr/local/lib/python3.8/site-packages -name cv2.*.so) \
   #  /usr/lib/python3.8/site-packages/cv2.so
   #  python -c 'import cv2; print("Python: import cv2 - SUCCESS")' \
