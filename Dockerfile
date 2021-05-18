@@ -1,7 +1,7 @@
 FROM alpine:3.12
 ENV LANG=C.UTF-8 \
     SHELL=/bin/bash PS1="\u@\h:\w \$ "
-ARG OPENCV_VERSION=4.5.2
+ARG OPENCV_VERSION=4.5.1
 RUN apk update && apk upgrade && \
     apk add --no-cache \
             bash \
