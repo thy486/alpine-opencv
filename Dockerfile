@@ -45,6 +45,8 @@ RUN apk update && apk upgrade && \
                   tiff-dev \
                   unzip \
                   zlib-dev \
+                  eigen \
+                  eigen-dev \
                   v4l-utils && \
   apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --virtual .build-dep2 \
                   libtbb libtbb-dev openblas openblas-dev && \
@@ -66,24 +68,27 @@ RUN apk update && apk upgrade && \
   cd /opt/opencv-${OPENCV_VERSION} && mkdir build && cd build && \
   cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D BUILD_opencv_python3=ON \
-    -D BUILD_opencv_python2=NO \
+    -D BUILD_opencv_python2=OFF \
     -D CMAKE_C_COMPILER=/usr/bin/clang \
     -D CMAKE_CXX_COMPILER=/usr/bin/clang++ \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
-    -D INSTALL_PYTHON_EXAMPLES=NO \
-    -D INSTALL_C_EXAMPLES=NO \
-    -D INSTALL_PYTHON_EXAMPLES=NO \
-    -D BUILD_EXAMPLES=NO \
-    -D BUILD_DOCS=NO \
+    -D EIGEN_INCLUDE_PATH=/usr/include/eigen3 \
+    -D OPENCV_ENABLE_NONFREE=OFF \
+    -D INSTALL_PYTHON_EXAMPLES=OFF \
+    -D INSTALL_C_EXAMPLES=OFF \
+    -D INSTALL_PYTHON_EXAMPLES=OFF \
+    -D BUILD_EXAMPLES=OFF \
+    -D BUILD_DOCS=OFF \
+    -D WITH_GSTREAMER=OFF \
+    -D WITH_EIGEN=ON \
     -D WITH_FFMPEG=ON \
     -D WITH_TBB=ON \
     -D WITH_V4L=ON \
     # -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv-${OPENCV_VERSION}/modules \
-    -D PYTHON_EXECUTABLE=/usr/local/bin/python \
-    .. && \
+    -D PYTHON_EXECUTABLE=/usr/local/bin/python .. && \
   make -j$(nproc) && make install && cd .. && rm -rf /opt/*  && \
 # Make sure it's built properly
   apk del --no-cache .build-dep1 .build-dep2 && \
   cp -p $(find /usr/local/lib/python3.8/site-packages -name cv2.*.so) \
-   /usr/lib/python3.8/site-packages/cv2.so && \
-   python -c 'import cv2; print("Python: import cv2 - SUCCESS")' \
+   /usr/lib/python3.8/site-packages/cv2.so
+  #  python -c 'import cv2; print("Python: import cv2 - SUCCESS")' \
