@@ -68,20 +68,21 @@ RUN apk update && apk upgrade && \
   cd /opt/opencv-${OPENCV_VERSION} && mkdir build && cd build && \
   cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D BUILD_opencv_python3=ON \
-    -D BUILD_opencv_python2=OFF \
+    -D BUILD_opencv_python2=NO \
     -D CMAKE_C_COMPILER=/usr/bin/clang \
     -D CMAKE_CXX_COMPILER=/usr/bin/clang++ \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
-    -D INSTALL_PYTHON_EXAMPLES=OFF \
-    -D INSTALL_C_EXAMPLES=OFF \
-    -D INSTALL_PYTHON_EXAMPLES=OFF \
-    -D BUILD_EXAMPLES=OFF \
-    -D BUILD_DOCS=OFF \
+    -D INSTALL_PYTHON_EXAMPLES=NO \
+    -D INSTALL_C_EXAMPLES=NO \
+    -D INSTALL_PYTHON_EXAMPLES=NO \
+    -D BUILD_EXAMPLES=NO \
+    -D BUILD_DOCS=NO \
     -D WITH_FFMPEG=ON \
     -D WITH_TBB=ON \
     -D WITH_V4L=ON \
     -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib-${OPENCV_VERSION}/modules \
-    -D PYTHON_EXECUTABLE=/usr/local/bin/python .. && \
+    -D PYTHON_EXECUTABLE=/usr/local/bin/python \ 
+    .. && \
   make -j$(nproc) && make install && rm -rf /opt/* && \
 # Make sure it's built properly
   apk del --no-cache .build-dep1 .build-dep2 && \
