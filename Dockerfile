@@ -68,15 +68,15 @@ RUN apk update && apk upgrade && \
   cd /opt/opencv-${OPENCV_VERSION} && mkdir build && cd build && \
   cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D BUILD_opencv_python3=ON \
-    -D BUILD_opencv_python2=NO \
+    -D BUILD_opencv_python2=OFF \
     -D CMAKE_C_COMPILER=/usr/bin/clang \
     -D CMAKE_CXX_COMPILER=/usr/bin/clang++ \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
-    -D INSTALL_PYTHON_EXAMPLES=NO \
-    -D INSTALL_C_EXAMPLES=NO \
-    -D INSTALL_PYTHON_EXAMPLES=NO \
-    -D BUILD_EXAMPLES=NO \
-    -D BUILD_DOCS=NO \
+    -D INSTALL_PYTHON_EXAMPLES=OFF \
+    -D INSTALL_C_EXAMPLES=OFF \
+    -D INSTALL_PYTHON_EXAMPLES=OFF \
+    -D BUILD_EXAMPLES=OFF \
+    -D BUILD_DOCS=OFF \
     -D WITH_FFMPEG=ON \
     -D WITH_TBB=ON \
     -D WITH_V4L=ON \
